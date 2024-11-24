@@ -1,0 +1,14 @@
+# Ping
+drop icmp any any -> any any (msg:"Ping detected"; itype:8; sid:2; classtype:icmp-event; rev:1;)
+
+# Nmap connection
+alert tcp any any -> any any (msg:"Nmap SYN Scan"; flags:S; classtype:intrusion-low; threshold, track by_src, count 20, seconds 3; sid:1000002;)
+
+# Netcat connection
+alert tcp any any -> any 12345 (msg:"Possible Netcat listen on port 12345"; classtype:intrusion-low; flags:S,12; sid:1000008;)
+
+# SSH
+## Multiple unsuccessful attempts
+alert tcp any any -> any 22 (msg: "Potential SSH Brute"; classtype:attempted-recon; flow:to_server; flags:S,12; threshold:type both, track by_src, count 3, seconds 2; sid:1000009; rev:1;)
+alert tcp any any -> any 22 (msg: "Potential SSH Brute"; classtype:attempted-recon; flow:to_server; flags:S,12; threshold:type both, track by_src, count 3, seconds 5; sid:1000009; rev:1;)
+alert tcp any any -> any 22 (msg: "Potential SSH Brute"; classtype:attempted-recon; flow:to_server; flags:S,12; threshold:type both, track by_src, count 3, seconds 5; sid:1000009; rev:1;)
