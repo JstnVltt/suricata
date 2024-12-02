@@ -1,6 +1,8 @@
 # Suricata
 A small project to discover Suricata IDS/IPS.
 
+See the blog post : https://jstnvltt.github.io/Portfolio/blog/deploying-suricata/
+
 ## Setup
 To setup this project, I created with VirtualBox two machines : 
 - one Ubuntu to be the server.
